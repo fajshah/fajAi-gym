@@ -12,12 +12,14 @@ interface HeaderNavProps {
   onOpenAuthModal: () => void;
 }
 
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
+
 export const HeaderNav: React.FC<HeaderNavProps> = ({ activeTab, onSelectTab, onOpenAuthModal }) => {
   const { user, logout } = useAuth();
   const [apiOnline, setApiOnline] = useState<boolean>(true);
 
   useEffect(() => {
-    fetch('http://localhost:8000/health')
+    fetch(`${API_BASE_URL}/health`)
       .then((res) => setApiOnline(res.ok))
       .catch(() => setApiOnline(false));
   }, []);

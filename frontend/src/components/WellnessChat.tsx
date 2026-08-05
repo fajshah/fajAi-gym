@@ -25,6 +25,8 @@ const CATEGORY_PROMPTS = [
   { category: '🏋️ Workout Recovery', prompt: 'What is the best post-workout recovery routine for my age & heart rate?' },
 ];
 
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
+
 export const WellnessChat: React.FC<WellnessChatProps> = ({
   sessionId,
   metrics,
@@ -60,7 +62,7 @@ export const WellnessChat: React.FC<WellnessChatProps> = ({
 
   const fetchHistory = async (sid: string) => {
     try {
-      const res = await fetch(`http://localhost:8000/api/v1/sessions/${sid}/messages`, {
+      const res = await fetch(`${API_BASE_URL}/api/v1/sessions/${sid}/messages`, {
         headers: {
           'Authorization': `Bearer ${idToken || 'mock_token'}`
         }
@@ -102,7 +104,7 @@ export const WellnessChat: React.FC<WellnessChatProps> = ({
     ]);
 
     try {
-      const response = await fetch('http://localhost:8000/api/v1/coach/stream', {
+      const response = await fetch(`${API_BASE_URL}/api/v1/coach/stream`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

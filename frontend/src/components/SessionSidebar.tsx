@@ -17,6 +17,8 @@ interface SessionSidebarProps {
   onNewSession: () => void;
 }
 
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
+
 export const SessionSidebar: React.FC<SessionSidebarProps> = ({
   activeSessionId,
   onSelectSession,
@@ -27,7 +29,7 @@ export const SessionSidebar: React.FC<SessionSidebarProps> = ({
 
   const fetchSessions = async () => {
     try {
-      const res = await fetch('http://localhost:8000/api/v1/sessions', {
+      const res = await fetch(`${API_BASE_URL}/api/v1/sessions`, {
         headers: {
           'Authorization': `Bearer ${idToken || 'mock_token'}`
         }

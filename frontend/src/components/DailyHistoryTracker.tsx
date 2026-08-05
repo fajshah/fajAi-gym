@@ -15,6 +15,8 @@ export interface DailyLogEntry {
   ai_summary?: string;
 }
 
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
+
 export const DailyHistoryTracker: React.FC = () => {
   const { idToken } = useAuth();
   const [logs, setLogs] = useState<DailyLogEntry[]>([]);
@@ -35,7 +37,7 @@ export const DailyHistoryTracker: React.FC = () => {
 
   const fetchLogs = async () => {
     try {
-      const res = await fetch('http://localhost:8000/api/v1/daily-logs', {
+      const res = await fetch(`${API_BASE_URL}/api/v1/daily-logs`, {
         headers: {
           'Authorization': `Bearer ${idToken || 'mock_token'}`
         }
@@ -80,7 +82,7 @@ export const DailyHistoryTracker: React.FC = () => {
     e.preventDefault();
     setLoading(true);
     try {
-      const res = await fetch('http://localhost:8000/api/v1/daily-logs', {
+      const res = await fetch(`${API_BASE_URL}/api/v1/daily-logs`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
