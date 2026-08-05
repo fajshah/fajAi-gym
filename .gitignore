@@ -1,0 +1,23 @@
+# Dependencies & Build files
+node_modules/
+.next/
+out/
+build/
+dist/
+venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# Local Environment Variables
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# IDE & OS files
+.DS_Store
+.vscode/
+.idea/
+*.log
